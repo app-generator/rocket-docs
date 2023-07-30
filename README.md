@@ -1,12 +1,11 @@
-# [Simpllo DOCS](https://www.docs.simpllo.com/)
+# [Rocket Generator](https://app-generator.dev/) `DOCS`
 
-The official documentation of Simpplo, an [Open-source Site Builder](https://www.simpllo.com/) actively supported by `AppSeed`.
+The official documentation of `Rocket Generator`, a service that allows anyone to generate secure apps and APIs on top of Django. 
 
-- 👉 [Free Site Builder](https://www.simpllo.com/) - `Live DEMO`
-- 👉 [Free Site Builder](https://www.docs.simpllo.com/) - `Documentation`
-- 🚀 [Join the Community](https://discord.gg/AWh6TFcEwU) - `Discord`
+- 👉 [Rocket Generator](https://app-generator.dev/) - `The Service`
+- 👉 [Rocket Generator](https://docs.app-generator.dev/) - `Documentation`
 
-![Free & Open-Source Website Builder - Actively Supported by AppSeed.](https://github.com/app-generator/free-site-builder/assets/51070104/9544f9a4-ed93-498a-a746-f6c8663be896) 
+![Rocket Generator - App Generator for Django.](https://github.com/app-generator/rocket-docs/assets/51070104/11a58812-5a5e-4fbb-96a0-cf238cbc1b54)
 
 <br />
 

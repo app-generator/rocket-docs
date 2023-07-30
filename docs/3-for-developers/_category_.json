@@ -1,9 +1,9 @@
 {
-  "label": "Simplo for Developers",
+  "label": "Content for Developers",
   "link": {
     "type": "generated-index",
     "slug": "/for-developers",
-    "description": "Learn how Simpllo is built."    
+    "description": "Learn how Rocket Generator is built."    
   }
 }
 

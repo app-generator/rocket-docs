@@ -88,7 +88,7 @@ const config = {
                 title: '',
                 logo: {
                     href: '/',
-                    alt: 'Simpllo',
+                    alt: 'Rocket Generator',
                     src: 'img/logo.png',
                 },
                 items: [
@@ -126,12 +126,12 @@ const config = {
                         title: 'Services',
                         items: [
                             {
-                                label: 'Free Site Builder',
-                                href: 'https://www.simpllo.com/',
+                                label: 'Django Generator',
+                                href: 'https://app-generator.dev/',
                             },
                             {
                                 label: 'Community',
-                                href: 'https://discord.gg/AWh6TFcEwU',
+                                href: 'https://discord.gg/fZC6hup',
                             },
                         ],
                     },
@@ -140,11 +140,11 @@ const config = {
                         items: [
                             {
                                 label: 'Intro (video)',
-                                href: 'https://youtu.be/mxQWwhEF21s',
+                                href: 'https://www.youtube.com/watch?v=4taJFTzu3EE',
                             },
                             {
                                 label: 'Open Issues',
-                                href: 'https://github.com/app-generator/free-site-builder/issues',
+                                href: 'https://github.com/app-generator/rocket-docs/issues',
                             },
                         ],
                     },

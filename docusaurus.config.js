@@ -13,12 +13,12 @@ const customFields = {
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-    title: 'Simpllo',
-    tagline: 'Build websites and Landing pages for free',
+    title: 'Rocket Generator',
+    tagline: 'Generate secure Apps and APIs on top of Django',
     favicon: 'img/favicon.png',
 
     // Set the production url of your site here
-    url: 'https://www.docs.simpllo.com',
+    url: 'https://docs.app-generator.dev',
     // Set the /<baseUrl>/ pathname under which your site is served
     // For GitHub pages deployment, it is often '/<projectName>/'
     baseUrl: '/',
@@ -149,7 +149,7 @@ const config = {
                         ],
                     },
                 ],
-                copyright: `&copy; ${new Date().getFullYear()} Simpllo`,
+                copyright: `&copy; ${new Date().getFullYear()} Rocket Generator`,
             },
             prism: {
                 theme: lightCodeTheme,

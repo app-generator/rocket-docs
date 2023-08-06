@@ -14,7 +14,40 @@ This article needs to explain:
 - Activate CI/CD flow (via GitHub)
 
 @ToDO
+  - How to generate an app using Rocket-Generator
+	To generate an app sign in Rocket-Generator.
+	Select your preferred layout.
+	Select your DB settings
+		Drver,Host,User,Name,Port,Password
+	Create/Edit Table.
+	Finally generate new app.  
+- Clone the generated repo
+	Once you’re on GitHub, find the main page of the repository.
+	Once you’re there, click <> Code. There, you should see an option to clone. 
+	Next, copy the URL.
+	Depending on your system, you’ll use Terminal (with Mac) or Command line (with Windows git bash) to move it to your local directory.
+	Use your Git clone command and the copied URL. 
 
+- Update the codebase for AWS
+	Step 1: Create a test listener.
+	Step 2: Update your Amazon ECS application.
+	Step 3: Create a lifecycle hook Lambda function.
+	Step 4: Update your AppSpec file.
+	Step 5: Use the CodeDeploy console to deploy your Amazon ECS service.
+	Step 6: View your Lambda hook function output in CloudWatch Logs.
+	Step 7: Clean up.
+
+- Deploy on AWS 
+	Get public ssh key of EC2 instance.
+	Put the public ssh key in the Git repository's deploy keys.
+	Get the private key, hostname, and user name of the AWS EC2 instance.
+	Create the . yml file in GitHub to build and deploy the application.
+
+
+- Activate CI/CD flow (via GitHub)
+	Step 1: Create or choose a repository, and pick a project.
+	Step 2: Open GitHub Actions in your repository to start building your CI/CD workflow.
+	Step 3: Make changes to your code to trigger your CI/CD pipeline.
 <br />
 
 ## Resources

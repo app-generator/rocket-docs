@@ -1,4 +1,3 @@
----
 title            : Deploy Django on AWS
 sidebar_label    : Django & AWS
 ---
@@ -15,44 +14,104 @@ This article needs to explain:
 
 @ToDO
   - How to generate an app using Rocket-Generator
-	To generate an app ,sign in Rocket-Generator.
-	Select your preferred layout.
-	Select your DB settings
-		Drver,Host,User,Name,Port,Password
-	Create/Edit Table.
-		Click "Add model" to create table and input table name.
-		Next Click "Add New Field" to add field.
-		Then input field name and type.
-	Set authentication and deployment.
-	Finally generate new app.  
+	Let's see how to generate app using Rocket-Generator
+	Rocket-Generator is a new service able to generate app on top of Django.
+	To generate app you have to sign in Rocket-generator with GitHub.
+	After sign in you go into Generator.
+	In this page you can design layout and database.
+	Rocket-Generator provides several layouts and you can select you preferred layout.
+	Also you can make database.
+	There are several database management systems such as sqlite,postgres,mysql,oracle and mssql.
+	When you select database system you should set Name,Host,Port,User,Password.
+	After select database system you should create models(tables).
+	Tables have their name and several fields and each field has name and type.
+	There are 3 types of field: String,Number and TimeStamp.
+	After finishing database selection and model creating you can set Authentication and Deployment.
+	Last you generate app by clicking "Generate" button.
 - Clone the generated repo
-	
-	Once you’re on GitHub, find the main page of the repository.
-	Once you’re there, click <></> Code. There, you should see an option to clone. 
-	Next, copy the URL.
-	Depending on your system, you’ll use Terminal (with Mac) or Command line (with Windows git bash) to move it to your local directory.
-	Use your Git clone command and the copied URL. 
-
+	When you generate app using Rocket-Generator,app will located in GitHub.
+	You can clone a repository directly from GitHub
+	First in the File menu, you should click "CLone Repository".
+	Then click the tab that corresponds to the location of the repository you want to clone.
+	You can also click URL to manually enter the repository location.
+	From the list of repositories, click the repository you want to clone.
+	To select the local directory into which you want to clone the repository, next to the "LLocal Path" field,
+	click "Choose..." and navigate to the directory.
+	At the bottom of the "Clone a Repository" window, click "Clone".
+	 
 - Update the codebase for AWS
-	Step 1: Create a test listener.
-	Step 2: Update your Amazon ECS application.
-	Step 3: Create a lifecycle hook Lambda function.
-	Step 4: Update your AppSpec file.
-	Step 5: Use the CodeDeploy console to deploy your Amazon ECS service.
-	Step 6: View your Lambda hook function output in CloudWatch Logs.
-	Step 7: Clean up.
+	To update codebase for AWS you have to create the buildspec file.
+		In this step, you create a build specification (build spec) file. 
+		A buildspec is a collection of build commands and related settings, in YAML format, that CodeBuild uses to run a build. 
+		Without a build spec, CodeBuild cannot successfully convert your build input into build output or locate the build output artifact in the build environment to upload to your output bucket.
+		Create this file, name it buildspec.yml, and then save it in the root (top level) directory.
+		Instead of including a build spec file in your source code, you can declare build commands separately when you create a build project. 
+		This is helpful if you want to build your source code with different build commands without updating your source code's repository each time.
+	Next you should create two S3 buckets
+		Although you can use a single bucket for this tutorial, two buckets makes it easier to see where the build input is coming from and where the build output is going.
+		One of these buckets (the input bucket) stores the build input. 
+		In this tutorial, the name of this input bucket is codebuild-region-ID-account-ID-input-bucket, where region-ID is the AWS Region of the bucket and account-ID is your AWS account ID.
+
+		The other bucket (the output bucket) stores the build output. 
+		In this tutorial, the name of this output bucket is codebuild-region-ID-account-ID-output-bucket.
+		If you chose different names for these buckets, be sure to use them throughout this tutorial.
+		These two buckets must be in the same AWS Region as your builds. For example, if you instruct CodeBuild to run a build in the US East (Ohio) Region, these buckets must also be in the US East (Ohio) Region.
+	Next you should upload the source code and the buildspec file
+		In this step, you add the source code and build spec file to the input bucket.
+		Using your operating system's zip utility, create a file named MessageUtil.zip that includes MessageUtil.java, TestMessageUtil.java, pom.xml, and buildspec.yml.
+		Upload the MessageUtil.zip file to the input bucket named codebuild-region-ID-account-ID-input-bucket.
+	Next you create the build project.
+		In this step, you create a build project that AWS CodeBuild uses to run the build. 
+		A build project includes information about how to run a build, including where to get the source code, which build environment to use, which build commands to run, and where to store the build output. 
+		A build environment represents a combination of operating system, programming language runtime, and tools that CodeBuild uses to run a build. 
+		The build environment is expressed as a Docker image. 
+		For this build environment, you instruct CodeBuild to use a Docker image that contains a version of the Java Development Kit (JDK) and Apache Maven.
+		
+		To create the build project
+			Use the AWS CLI to run the create-project command:
+				aws codebuild create-project --generate-cli-skeleton
+			JSON-formatted data appears in the output. 
+			Copy the data to a file named create-project.json in a location on the local computer or instance where the AWS CLI is installed. 
+			If you choose to use a different file name, be sure to use it throughout this tutorial.
+		
+			Switch to the directory that contains the file you just saved, and then run the create-project command again.
+				aws codebuild create-project --cli-input-json file://create-project.json
+	Last you run the build.
+		In this step, you instruct AWS CodeBuild to run the build with the settings in the build project.
+		To run the build
+			Use the AWS CLI to run the start-build command:
+				aws codebuild start-build --project-name project-name
+			Replace project-name with your build project name from the previous step (for example, codebuild-demo-project).
 
 - Deploy on AWS 
-	Get public ssh key of EC2 instance.
-	Put the public ssh key in the Git repository's deploy keys.
-	Get the private key, hostname, and user name of the AWS EC2 instance.
-	Create the . yml file in GitHub to build and deploy the application.
+	Before you can call any AWS CLI commands that interact with GitHub (such as the create-deployment command, which you will call next),
+	 you must give CodeDeploy permission to use your GitHub user account to interact with GitHub for the CodeDeployGitHubDemo-App application.
+	Currently, you must use the CodeDeploy console to do this.
+	Sign in to the AWS Management Console and open the CodeDeploy console at https://console.aws.amazon.com/codedeploy.
+	In the navigation pane, expand Deploy, then choose Applications.
+	Choose CodeDeployGitHubDemo-App.
+	On the Deployments tab, choose Create deployment.
+		You will not be creating a new deployment. 
+		This is currently the only way to give CodeDeploy permission to interact with GitHub on behalf of your GitHub user account.
+	From Deployment group, choose CodeDeployGitHubDemo-DepGrp.
+	In Revision type, choose GitHub.
+	In Connect to GitHub, do one of the following:
+		-To create a connection for CodeDeploy applications to a GitHub account, sign out of GitHub in a separate web browser tab. 
+		In GitHub account, type a name to identify this connection, and then choose Connect to GitHub. 
+		The web page prompts you to authorize CodeDeploy to interact with GitHub for the application named CodeDeployGitHubDemo-App. Continue to step 8.
+		-To use a connection you have already created, in GitHub account, select its name, and then choose Connect to GitHub. Continue to step 10.
+		-To create a connection to a different GitHub account, sign out of GitHub in a separate web browser tab. 
+		Choose Connect to a different GitHub account, and then choose Connect to GitHub. Continue to step 8.
+	Follow the instructions on the Sign in page to sign in with your GitHub user name or email and password.
+	On the Authorize application page, choose Authorize application.
+	On the CodeDeploy Create deployment page, choose Cancel.
+	Call the create-deployment command to deploy the revision from your GitHub repository to the instance.
 
 
 - Activate CI/CD flow (via GitHub)
-	Step 1: Create or choose a repository, and pick a project.
-	Step 2: Open GitHub Actions in your repository to start building your CI/CD workflow.
-	Step 3: Make changes to your code to trigger your CI/CD pipeline.
+	First you create or choose a repository and pick a project.
+	Next open GitHub Actions in your repository to start building your CI/CD workflow.
+	Last make changes to your code to trigger your CI/CD pipeline.
 <br />
 
 ## Resources

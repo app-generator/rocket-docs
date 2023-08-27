@@ -1,0 +1,8 @@
+{
+  "label": "Technologies",
+  "link": {
+    "type": "generated-index",
+    "slug": "/technologies",
+    "description": "Technologies used by the Rocket Generator (Python, Javascript, Django)"    
+  }
+}

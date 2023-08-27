@@ -1,5 +1,12 @@
 sm0ke:
   name: Sm0ke 
-  title: Founder @ Simpllo, AppSeed, DeployPRO
+  title: Founder @ Rocket Generator, AppSeed, DeployPRO
   url: https://github.com/app-generator
   image_url: https://github.com/sm0keDev.png
+
+deroude:
+  name: Valentin Raduti
+  title: Full-Stack Developer, TL
+  url: https://github.com/deroude
+  image_url: https://github.com/deroude.png
+

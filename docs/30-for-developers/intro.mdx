@@ -4,9 +4,149 @@ title            : Rocket - The Coding Pattern
 sidebar_label    : The Concept
 ---
 
-# The Pattern, Why `Rocket`
+# The Pattern
 
-@ToDo 
+Rocket Generator is a tool built using a 2nd generation pattern on top of [AppSeed](https://appseed.us/). 
+
+Here are the main improvements that makes the generator superior in most aspects: 
+
+- [Slim-fit Codebase](#slim-fit-codebase) 
+- [UI installed from libraries](#ui-external-libraries) (not hardcoded in the codebase)
+- [API Generator](#api-generator) usable for any defined Model 
+- [Extended User Model](#extended-user-model)
+- [Models Editor](#models-editor) 
+- [Deployment-Ready](#deployment-ready) via [DeployPRO](https://deploypro.dev/) 
+
+Let's say a few words about each one. 
+
+![Django Generator - UI Components](https://github-production-user-asset-6210df.s3.amazonaws.com/51070104/263534078-8c39e744-9d9b-4704-8aeb-4ff16a8be082.png)
+
+<br />
+
+## Slim-Fit Codebase 
+
+The AppSeed Generator provides all the features inside the starter and this makes the codebase `FAT`, sometimes with 500 files or more (up to 1k).
+From the user perspective, this might not be a problem but during the GitHub upload, the process sometimes gets canceled due to the overuse of GitHub API. 
+
+Rocket Generator uses a different pattern where all the features are libraries: UI Kits, and API Generator. 
+The process simply executed the following steps: 
+
+- Collects the user input
+- Injects the configuration for the UI
+- Generates the models using the definitions
+- Activate the API for selected models 
+
+With this new pattern, the most complex starter shouldn't have more than 100 files because the actual build happens on the user side during compilation. 
+
+<br />
+
+## UI (External Libraries)
+
+All the UI kist integrated with the generator can be used by anyone outside the service. Here are the links: 
+
+- [Django Admin Soft](https://github.com/app-generator/django-admin-soft-dashboard) - `dashboard design`
+- [Tabler](https://github.com/app-generator/django-admin-tabler) - `dashboard design`
+- [Berry Bootstrap 5](https://github.com/app-generator/django-admin-berry) - `dashboard design`
+- [Corporate UI](https://github.com/app-generator/django-admin-corporate) - `dashboard design`
+- [Material KIT](https://github.com/app-generator/django-theme-material-kit) - `UI Kit Design`
+- [Pixel Bootstrap 5](https://github.com/app-generator/django-theme-pixel) - `UI Kit Design` 
+
+When the user selects one kit/dashboard from the above list, the generator executes the same steps on the sample codebase as the ones listed on the README. 
+
+For instance, if the user selects [Soft Dashboard](https://github.com/app-generator/django-admin-soft-dashboard), here are the steps executed by the generator: 
+
+- Add `django-admin-soft-dashboard` as a dependency in `requirements.txt`
+- Update `configuration->INSTALLED_APPS` section:
+  - Add `admin_soft.apps.AdminSoftDashboardConfig` 
+- Update project routing 
+  - Add `path('', include('admin_soft.urls')),` 
+
+The above steps are executed by a custom parser that knows how to safely update the codebase, apply changes and keep the project compilable once the changes are operated. 
+
+![Rocket Generator - UI Selector.](https://github-production-user-asset-6210df.s3.amazonaws.com/51070104/263542129-22089eeb-3093-4c61-915a-c2421ecf47c4.png) 
+
+<br />
+
+## [API Generator](https://github.com/app-generator/django-api-generator) 
+
+For each defined model, the user has the option to activate an API node with full CRUD access: 
+
+- GET requests are public (get All items, get item by ID)
+- Mutating Requests (CREATE, UPDATE, DELETE) requires authentication 
+
+This feature is provided via [Django API Generator](https://github.com/app-generator/django-api-generator), an open-source library built on top of `DRF`.
+
+Regarding the generator processing, here are the steps performed for models integration:
+
+- Add `django-api-generator` as a dependency in `requirements.txt`
+- Update `configuration->INSTALLED_APPS` section:
+
+```python
+INSTALLED_APPS = [
+    'django_api_gen',            # Django API GENERATOR  # <-- NEW
+    'rest_framework',            # Include DRF           # <-- NEW 
+    'rest_framework.authtoken',  # Include DRF Auth      # <-- NEW   
+]
+```
+
+- Create new sections in the project settings 
+
+```python
+API_GENERATOR = {
+    'MODEL_API_PATH'  : "MODEL_DEFINITION_PATH",
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
+```
+
+The most challenging part is to have a controlled injection for each model because the user can activate the API for a single model, all models, or none. 
+
+![Rocket Generator - API Generator](https://github-production-user-asset-6210df.s3.amazonaws.com/51070104/263542204-8fde0620-9256-4dd3-9e47-68cbd4a894eb.png)
+
+<br />
+
+## Extended User Model
+
+This feature is something that most of the Django Apps require at some point. 
+To cover this point, the generator empowers the user to define a custom user model using a few defaults: 
+
+- name
+- phone 
+- bio 
+
+> Note: The API generator option is not activated in the UI.  
+
+![Rocket Generator - Extended User Model.](https://github-production-user-asset-6210df.s3.amazonaws.com/51070104/263541894-2afed0fb-525a-424d-a14e-7990a88e7705.png)
+
+<br />
+
+## Models Editor 
+
+The users can edit and design their database via a simple UI. This is unsupported on AppSeed.   
+
+![Rocket Generator - Models Editor](https://github-production-user-asset-6210df.s3.amazonaws.com/51070104/263529172-857897cd-e2a2-4706-9fbd-79a042c2646a.png) 
+
+<br />
+
+## [Deployment](https://deploypro.dev/) `Ready` 
+
+All starters generated with Docker support can be deployed via [DeployPRO](https://deploypro.dev/) service using a simple flow: 
+
+- Authenticate/register into [DeployPRO](https://deploypro.dev/)
+- Connect your preferred cloud provider
+  - [AWS](https://www.docs.deploypro.dev/aws/intro), [Azure](https://www.docs.deploypro.dev/azure/intro) or [DigitalOcean](https://www.docs.deploypro.dev/app-platform-do/intro) 
+- Create a new [VPS Server](https://www.docs.deploypro.dev/glossary/terms/vps) 
+  - this operation takes ~5min 
+- Deploy the GitHub Repositor (needs ownership)        
+
+In less than 10 minutes, if the project has an usable `Dockerfile`, the project goes LIVE with an active Ci/CD flow. 
+
+![Deployment Ready Starters via DeployPRO.](https://github-production-user-asset-6210df.s3.amazonaws.com/51070104/263542646-8d7e6b56-4fd3-4958-a761-cbf040186b47.png)
 
 <br />
 

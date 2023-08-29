@@ -1,5 +1,14 @@
 # Change Log
 
+## [1.0.2] 2023-08-29
+### Changes
+
+- Update [Technologies](https://docs.app-generator.dev/technologies) Section
+- Added **Python** Section
+  - [Documents Summary in Python](https://docs.app-generator.dev/technologies/python/document-summary)
+  - [Python Libraries](https://docs.app-generator.dev/technologies/python/popular-libraries)
+  - [Web Scraping in Python](https://docs.app-generator.dev/technologies/python/web-scraping)
+
 ## [1.0.1] 2023-08-27
 ### Changes
 

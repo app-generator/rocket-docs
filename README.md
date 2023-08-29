@@ -10,4 +10,4 @@ The official documentation of `Rocket Generator`, a service that allows anyone t
 <br />
 
 ---
-[Free Site Builder](https://www.simpllo.com/) - Provided by **AppSeed**.
+[Rocket Generator](https://app-generator.dev/) - A free `Django Generator` crafted by **AppSeed**.

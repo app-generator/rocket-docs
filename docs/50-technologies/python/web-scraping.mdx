@@ -1,0 +1,77 @@
+---
+sidebar_position : 1
+title            : Web Scraping in Python
+sidebar_label    : Web Scraping
+---
+
+# Web Scraping in Python
+
+To extract data from a website, you typically use a technique called web scraping. Web scraping involves retrieving information from websites and then parsing and extracting the relevant data for your needs. 
+Python provides several libraries that make web scraping easier. 
+One popular choice is using the combination of the `requests` library for fetching web pages and the `Beautiful Soup` library for parsing HTML and XML documents. Here's a general process you can follow:
+
+## ✅ **Install Libraries**
+
+First, make sure you have the required libraries installed. You can install them using `pip`, Python's package installer:
+
+```bash
+pip install requests beautifulsoup4
+```
+
+## ✅ **Send HTTP Requests**
+
+Use the `requests` library to send an HTTP GET request to the website's URL and retrieve the webpage's HTML content. For example:
+
+```python
+import requests
+
+url = "https://example.com"
+response = requests.get(url)
+
+if response.status_code == 200:
+    html_content = response.content
+else:
+    print("Failed to fetch the webpage")
+```
+
+## ✅ **Parse HTML**
+
+Use `Beautiful Soup` to parse the HTML content and navigate through the webpage's structure. You can search for specific elements based on their HTML tags, classes, IDs, etc.
+
+```python
+from bs4 import BeautifulSoup
+
+soup = BeautifulSoup(html_content, "html.parser")
+```
+
+## ✅ **Extract Data**
+
+Once you have the `soup` object, you can use its methods to find and extract the data you're interested in. For example, to extract all the text within `<p>` tags:
+
+```python
+paragraphs = soup.find_all("p")
+for paragraph in paragraphs:
+    print(paragraph.text)
+```
+
+You can also access attributes of elements using dictionary-like syntax:
+
+```python
+link = soup.find("a")
+link_text = link.text
+link_url = link["href"]
+```
+
+<br />
+
+Additionally, some websites might offer APIs that provide structured data, which is often a more reliable and efficient way to get the data you need.
+
+Keep in mind that websites can change their structure, so your scraping code might need adjustments over time. 
+Also, excessive or aggressive scraping can put a strain on the website's servers and potentially violate its terms of use, so use web scraping thoughtfully and responsibly.
+
+<br />
+
+## Resources
+
+- 👉 [Generate Django Apps](https://app-generator.dev/django/) using `Rocket Generator`
+- 👉 Join the [Community](https://discord.gg/fZC6hup) and chat with the `support` team 

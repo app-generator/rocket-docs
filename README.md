@@ -1,6 +1,6 @@
 # [Rocket Generator](https://app-generator.dev/) `DOCS`
 
-The official documentation of `Rocket Generator`, a service that allows anyone to generate secure apps and APIs on top of Django. 
+The official documentation of `Rocket Generator`, a service that allows anyone to **[Generate Apps and APIs on top of Django](https://app-generator.dev/django/)**, a leading `Python` framework.
 
 - 👉 [Rocket Generator](https://app-generator.dev/) - `The Service`
 - 👉 [Rocket Generator](https://docs.app-generator.dev/) - `Documentation`

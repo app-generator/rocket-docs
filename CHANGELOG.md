@@ -1,5 +1,14 @@
 # Change Log
 
+## [1.0.3] 2023-08-29
+### Changes
+
+- [Django vs FastAPI](https://docs.app-generator.dev/technologies/django/django-vs-fastapi)
+- [Django vs Flask](https://docs.app-generator.dev/technologies/django/django-vs-flask)
+- [Django vs Laravel](https://docs.app-generator.dev/technologies/django/django-vs-laravel)
+- [Django vs Spring](https://docs.app-generator.dev/technologies/django/django-vs-spring)
+- [Django vs React](https://docs.app-generator.dev/technologies/django/django-vs-react)
+
 ## [1.0.2] 2023-08-29
 ### Changes
 

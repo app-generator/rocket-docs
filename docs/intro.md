@@ -6,7 +6,7 @@ slug            : /
 ---
 <!-- GOOGLE Stuff -->
 <head>
-    <meta name="google-site-verification" content="oBAlWYJIhaohrZTMhR0uXsuv9j-nx-CcHRZkBmsxJrQ" />
+    <meta name="google-site-verification" content="EtXV-RjJPvOzjyJL8MPdHiNQDZnoFBt-87HRdYuJJuE" />
 </head>
 
 Introducing **[Rocket Generator](https://app-generator.dev)**, a tool that aims to help developers generate starters on top of **Django**, a leading Python framework.  

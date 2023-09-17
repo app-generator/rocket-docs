@@ -1,0 +1,140 @@
+---
+sidebar_position : 2
+title            : Django and HTMX Integration   
+sidebar_label    : Django & HTMX
+---
+
+# Django and HTMX Integration
+
+**HTMX** is a lightweight JavaScript library that allows you to create dynamic web applications with minimal JavaScript code. 
+
+**When combined with Django**, it can enhance your Django projects by enabling real-time updates and interactions without the need for complex JavaScript frameworks. 
+
+![Django Web Framework - HTMX Integration (Cover Image)](https://github-production-user-asset-6210df.s3.amazonaws.com/51070104/268485357-df36ff1d-9e89-4725-b38e-9ed3cff950be.png)
+
+> Here's an overview of HTMX, some common **Django and HTMX use cases**, and a coding sample of how to use Django with HTMX for dynamic web applications.
+
+## ✅ **What is HTMX?**
+
+HTMX is a JavaScript library that enables client-server interaction by adding HTML attributes to your markup. With HTMX, 
+you can make parts of your web application update dynamically without writing extensive JavaScript code. 
+
+It simplifies the process of creating interactive web pages by enhancing the capabilities of plain HTML and CSS.
+
+## ✅ **Django & HTMX Use Cases**
+
+### **Real-time Updates** 
+
+HTMX can be used to create real-time features in your Django applications, such as live chat, notifications, or dynamic data loading without requiring a full JavaScript framework like React or Vue.js.
+
+### **Form Submission** 
+
+HTMX simplifies form submissions by allowing you to submit form data to the server without reloading the entire page. This is useful for creating responsive and interactive forms in Django.
+
+### **Progressive Enhancement** 
+
+You can use HTMX to enhance the user experience by adding interactivity progressively. This means that your application will still work if JavaScript is disabled in the user's browser.
+
+### **AJAX Requests** 
+
+HTMX can be used for making AJAX requests to Django views without writing extensive JavaScript code. This is particularly useful for fetching data from the server without reloading the page.
+
+<br />
+
+## ✅ Coding Sample (Django & HTMX)
+
+Here's a coding sample of how to use Django with HTMX to create a dynamic form that submits data to a Django view without a full page reload.
+
+### **Install HTMX**
+
+Include the HTMX library in your project by adding it to your HTML template:
+
+```html
+<!-- Include HTMX from a CDN -->
+<script src="https://cdn.jsdelivr.net/npm/htmx.org@1.6.0/dist/htmx.min.js" integrity="sha384-EqGYQsMcNz9JinC9VBcAfu55tew5fCE6MHJXX0XSCPLuqMzts9FZmXuimabImRBp" crossorigin="anonymous"></script>
+```
+
+### **Create a Django View for Form Handling**
+
+In your Django views, create a view function to handle the form submission. Here's an example using Django's built-in form handling:
+
+```python
+# views.py
+from django.shortcuts import render
+from django.http import JsonResponse
+from .forms import YourForm
+
+def submit_form(request):
+    if request.method == 'POST':
+        form = YourForm(request.POST)
+        if form.is_valid():
+            # Process form data and return a JSON response
+            data = {'message': 'Form submitted successfully!'}
+            return JsonResponse(data)
+        else:
+            # Return form errors as JSON response
+            errors = form.errors.as_json()
+            return JsonResponse({'errors': errors}, status=400)
+    else:
+        form = YourForm()
+    return render(request, 'your_template.html', {'form': form})
+```
+
+### **Create an HTML Form with HTMX Attributes**
+
+In your HTML template, create a form with HTMX attributes to enable dynamic form submission:
+
+```html
+<!-- your_template.html -->
+<form id="your-form" hx-post="{% url 'submit_form' %}" hx-swap="outerHTML">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" hx-trigger="click focus">Submit</button>
+</form>
+<div id="form-response" hx-target="#form-response"></div>
+```
+
+In this example, we're using HTMX attributes like `hx-post` to specify the URL for form submission and `hx-swap` to define where the response should be inserted. 
+The `hx-trigger` attribute is used to specify the event that triggers the form submission.
+
+### **Add HTMX JavaScript**
+
+You can add custom JavaScript to further enhance your interactions if needed. For example, you can show a loading spinner during form submission:
+
+```html
+<!-- Include HTMX JavaScript -->
+<script>
+  document.body.addEventListener('htmx:configRequest', function (event) {
+    // Show a loading spinner during the request
+    var form = document.getElementById('your-form');
+    form.classList.add('loading');
+  });
+
+  document.body.addEventListener('htmx:afterRequest', function (event) {
+    // Remove the loading spinner after the request
+    var form = document.getElementById('your-form');
+    form.classList.remove('loading');
+  });
+</script>
+```
+
+### **Styling**
+
+You can add CSS styles to your template to customize the appearance of the form and loading spinner as needed.
+
+<br />
+
+## ✅ In Summary
+
+This is a basic example of **how to use Django with HTMX** to create a dynamic form. 
+Depending on your project's requirements, you can apply similar principles to other use cases, such as real-time updates and progressive enhancement of your Django application. 
+
+`HTMX` simplifies the process of creating interactive web pages `with minimal JavaScript code`, making it a valuable addition to your Django projects.
+
+<br />
+
+## ✅ Resources
+
+- 👉 [Generate Django Apps](https://app-generator.dev/django/) using `Rocket Generator`
+- 👉 Join the [Community](https://discord.gg/fZC6hup) and chat with the `support` team 
+- 👉 [Deploy Django on AWS, DO, and Azure](https://www.docs.deploypro.dev/) using `DeployPRO`

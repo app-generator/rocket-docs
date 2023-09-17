@@ -1,0 +1,160 @@
+---
+sidebar_position : 2
+title            : Django and Stripe Integration   
+sidebar_label    : Django & Stripe
+---
+
+# Django and Stripe Integration
+
+`Stripe` is a popular payment processing platform that allows businesses to accept payments online. When **integrating Stripe with Django**, you can create a seamless payment experience for your users. 
+
+![Django Web Framework - Stripe Integration (Cover Image)](https://github-production-user-asset-6210df.s3.amazonaws.com/51070104/268485357-df36ff1d-9e89-4725-b38e-9ed3cff950be.png)
+
+Here's an overview of Stripe, some common Django and Stripe use cases, and a coding sample of how to use Django with Stripe for payment processing.
+
+## ✅ **What is Stripe?**
+
+Stripe is an online payment processing platform that enables businesses to accept payments over the internet. 
+It provides a set of APIs and tools that make it easy to integrate payment functionality into web and mobile applications. Stripe supports various payment methods, including credit cards, digital wallets, and more, making it a versatile choice for online businesses.
+
+## ✅ **Django & Stripe Use Cases**
+
+### **Online Payments** 
+
+The most common use case is processing online payments for products or services. Django can be integrated with Stripe to securely handle payment transactions, including one-time payments and recurring subscriptions.
+
+### **E-commerce** 
+
+If you're building an e-commerce website with Django, you can use Stripe to facilitate the checkout process. This includes handling product purchases, order management, and payment processing.
+
+### **Donations** 
+
+Many nonprofit organizations use Stripe to accept donations on their websites. Django can be used to create donation forms and securely process payments for charitable contributions.
+
+### **Membership Sites** 
+
+If you run a membership-based website, you can use Stripe to manage subscriptions and recurring payments. Django can help you build the membership site's backend and integrate with Stripe for billing.
+
+<br />
+
+## ✅ Coding Sample (Django & Stripe)
+
+Here's a coding sample of how to use Django with Stripe for payment processing. 
+In this example, we'll set up Stripe for one-time payments in a Django project.
+
+### **Install Stripe Python Library**
+
+You need to install the `stripe` Python library to interact with Stripe from your Django project. You can install it using `pip`:
+
+```bash
+pip install stripe
+```
+
+###  **Configure Django Settings**
+
+In your Django project's settings (`settings.py`), configure the Stripe API keys. You can find your API keys in your Stripe account dashboard:
+
+```python
+# settings.py
+
+STRIPE_PUBLISHABLE_KEY = 'your_publishable_key'
+STRIPE_SECRET_KEY = 'your_secret_key'
+```
+
+### **Create a Payment Form (Django)**
+
+Create a form in your Django application to collect payment information from the user. For example:
+
+```python
+# forms.py
+from django import forms
+
+class PaymentForm(forms.Form):
+    card_number = forms.CharField(label='Card Number', widget=forms.TextInput(attrs={'placeholder': '4242 4242 4242 4242'}))
+    exp_month = forms.IntegerField(label='Expiry Month')
+    exp_year = forms.IntegerField(label='Expiry Year')
+    cvc = forms.IntegerField(label='CVC')
+```
+
+### **Create a View for Payment**
+
+In your Django views, create a view function to handle payment processing. Use the Stripe Python library to create a payment charge:
+
+```python
+# views.py
+from django.shortcuts import render, redirect
+from django.conf import settings
+import stripe
+from .forms import PaymentForm
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
+def process_payment(request):
+    if request.method == 'POST':
+        form = PaymentForm(request.POST)
+        if form.is_valid():
+            # Retrieve payment information from the form
+            card_number = form.cleaned_data['card_number']
+            exp_month = form.cleaned_data['exp_month']
+            exp_year = form.cleaned_data['exp_year']
+            cvc = form.cleaned_data['cvc']
+
+            # Create a payment charge using Stripe
+            try:
+                charge = stripe.Charge.create(
+                    amount=1000,  # Amount in cents (e.g., $10.00)
+                    currency='usd',
+                    source=card_number,
+                    description='Example Payment',
+                )
+                # Payment successful
+                return redirect('payment_success')
+            except stripe.error.CardError as e:
+                error_msg = e.error.message
+    else:
+        form = PaymentForm()
+
+    return render(request, 'payment.html', {'form': form, 'error_msg': error_msg})
+```
+
+In this example, we create a payment charge using Stripe's API when the form is submitted.
+
+### **Create a Template for Payment Form**
+
+Create an HTML template (`payment.html`) to display the payment form to the user:
+
+```html
+<!-- payment.html -->
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Pay Now</button>
+  {% if error_msg %}
+    <p>{{ error_msg }}</p>
+  {% endif %}
+</form>
+```
+
+### **Payment Success Page**
+
+Create a success page (`payment_success.html`) to display to the user after a successful payment:
+
+```html
+<!-- payment_success.html -->
+<h1>Payment Successful!</h1>
+```
+
+## ✅ In Summary
+
+This is a basic example of how to use Django with Stripe for one-time payments. 
+Depending on your project requirements, you can expand on this by implementing subscription-based payments, handling webhooks for asynchronous events, and more.
+
+Remember to keep your Stripe API keys secure, and consider using Django's built-in security features to protect sensitive data in your application.
+
+<br />
+
+## ✅ Resources
+
+- 👉 [Generate Django Apps](https://app-generator.dev/django/) using `Rocket Generator`
+- 👉 Join the [Community](https://discord.gg/fZC6hup) and chat with the `support` team 
+- 👉 [Deploy Django on AWS, DO, and Azure](https://www.docs.deploypro.dev/) using `DeployPRO`

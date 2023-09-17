@@ -1,5 +1,5 @@
 ---
-title           : Rocket Generator
+title           : Django App Generator
 sidebar_position: 1
 sidebar_label   : Intro
 slug            : /
@@ -103,5 +103,8 @@ $ python manage.py runserver
 
 <br />
 
+## Resources
+
 - 👉 [Generate Django Apps](https://app-generator.dev/django/) using `Rocket Generator`
 - 👉 Join the [Community](https://discord.gg/fZC6hup) and chat with the `support` team 
+- 👉 [Deploy Django on AWS, DO, and Azure](https://www.docs.deploypro.dev/) using `DeployPRO`

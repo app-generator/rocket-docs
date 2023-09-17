@@ -1,0 +1,67 @@
+---
+sidebar_position : 2
+title            : ASGI Servers for Django
+sidebar_label    : ASGI Servers
+---
+
+# ASGI Servers for Django
+
+Django traditionally uses WSGI (Web Server Gateway Interface) servers for serving web applications. 
+While Django itself has introduced [support for asynchronous code](./async-support) starting from version 3.0, 
+it primarily relies on ASGI (Asynchronous Server Gateway Interface) servers for handling asynchronous code. ASGI is an evolution of WSGI designed to support asynchronous web applications. 
+
+> Here's a **list of ASGI Servers** that can be used with `Django` for handling asynchronous code:
+
+## ✅ **Daphne** 
+
+Daphne is a widely used ASGI server designed for Django applications. It's an easy choice for deploying Django applications that use async views and other asynchronous features. 
+Daphne is the recommended server for Django's ASGI support.
+
+- GitHub: https://github.com/django/daphne
+
+## ✅ **Uvicorn** 
+
+Uvicorn is a lightning-fast ASGI server that can be used to serve Django applications asynchronously. 
+It's a popular choice for running Python ASGI web applications, including Django with async support.
+
+- GitHub: https://github.com/encode/uvicorn
+
+## ✅ **Hypercorn** 
+
+Hypercorn is another ASGI server known for its performance and compatibility with ASGI applications, including Django. It's designed to be a production-ready server and supports HTTP/1.1 and HTTP/2.
+
+- GitHub: https://github.com/pgjones/hypercorn
+
+## ✅ **ASGI Server for Nginx** 
+
+In some production setups, you might use Nginx as a reverse proxy server in front of ASGI servers like Daphne, Uvicorn, or Hypercorn. 
+Nginx can be configured to proxy requests to the ASGI server, providing a robust and scalable deployment solution for Django applications.
+
+- Example Configuration: https://docs.djangoproject.com/en/3.2/howto/deployment/asgi/nginx/
+
+## ✅ **Starlette with an ASGI Server** 
+
+Starlette is a lightweight ASGI framework that can be used in conjunction with an ASGI server to build async web applications. While not a server itself, it can be used with ASGI servers like Uvicorn or Hypercorn to serve Django applications asynchronously.
+
+- GitHub: https://github.com/encode/starlette
+
+## ✅ **Django Channels** 
+
+Django Channels is an extension to Django that adds support for handling real-time features like WebSockets and asynchronous code. While it's not a standalone ASGI server, it can be used in combination with ASGI servers like Daphne to handle WebSocket connections and other async features within Django.
+
+- GitHub: https://github.com/django/channels
+
+<br />
+
+## ✅ In Summary
+
+When choosing an ASGI server for your Django project, consider factors such as performance, ease of configuration, and compatibility with your hosting environment. 
+Additionally, always refer to the official documentation and resources for the ASGI server of your choice to ensure proper setup and deployment.
+
+<br />
+
+## ✅ Resources
+
+- 👉 [Generate Django Apps](https://app-generator.dev/django/) using `Rocket Generator`
+- 👉 Join the [Community](https://discord.gg/fZC6hup) and chat with the `support` team 
+- 👉 [Deploy Django on AWS, DO, and Azure](https://www.docs.deploypro.dev/) using `DeployPRO`

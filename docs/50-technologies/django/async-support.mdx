@@ -1,0 +1,105 @@
+---
+sidebar_position : 2
+title            : Django Asynchronous Support  
+sidebar_label    : Async Support
+---
+
+# Django Asynchronous Support
+
+Django introduced asynchronous (async) support starting from Django 3.0.
+This feature allows developers to write asynchronous code within Django applications, taking advantage of Python's async and await syntax. 
+
+Async support in Django can be beneficial for improving the scalability and responsiveness of web applications, particularly in situations where there are I/O-bound operations, 
+such as database queries or external API calls.
+
+Here's a theoretical overview of how async support works in Django and a few code examples to illustrate its usage.
+
+## ✅ **Theoretical Overview**
+
+### **Async View Functions** 
+
+With async support, you can define view functions as asynchronous by using the `async def` syntax. 
+This allows these functions to perform non-blocking I/O operations and handle multiple requests concurrently.
+
+### **Database Queries** 
+
+You can use Django's ORM (Object-Relational Mapping) to perform asynchronous database queries. 
+Async database queries help avoid blocking the event loop and allow other tasks to run while waiting for the database response.
+
+### **Middleware** 
+
+Django provides async middleware support. Middleware components can also be asynchronous, making it possible to perform async operations during request and response processing.
+
+### **Third-party Libraries** 
+
+You can use third-party libraries that support async operations, such as HTTP clients for making async requests to external APIs or services.
+
+## ✅ **Code Examples**
+
+Here are a few code examples to demonstrate how async support works in Django:
+
+### **Async View Function**
+
+```python
+# views.py
+from django.http import JsonResponse
+
+async def async_example(request):
+    # Simulate an asynchronous task (e.g., fetching data from an API)
+    result = await some_async_function()
+    return JsonResponse({'result': result})
+```
+
+In this example, the `async_example` view function is defined as asynchronous using `async def`. It awaits the result of an asynchronous task, such as fetching data from an external API.
+
+### **Async Database Query**
+
+```python
+# views.py
+from django.http import JsonResponse
+from .models import MyModel
+
+async def async_db_query(request):
+    # Perform an asynchronous database query
+    queryset = MyModel.objects.filter(some_field=some_value)
+    results = await queryset.values()
+    return JsonResponse({'results': results})
+```
+
+In this example, an asynchronous database query is performed using Django's ORM. The `await` keyword is used to wait for the database query to complete without blocking the event loop.
+
+### **Async Middleware**
+
+```python
+# middleware.py
+class AsyncMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    async def __call__(self, request):
+        # Perform an async operation before handling the request
+        await some_async_task()
+        
+        response = await self.get_response(request)
+        
+        # Perform an async operation after handling the request
+        await some_other_async_task()
+        
+        return response
+```
+
+In this example, the middleware `AsyncMiddleware` contains asynchronous code that runs before and after the request is handled. 
+This allows you to perform async tasks at different stages of request processing.
+
+## ✅ In Summary
+
+Please note that when using async features in Django, the web server needs to support asynchronous code. 
+For this use-case, some popular choices are ASGI (Asynchronous Server Gateway Interface) servers like Daphne or Uvicorn.
+
+<br />
+
+## ✅ Resources
+
+- 👉 [Generate Django Apps](https://app-generator.dev/django/) using `Rocket Generator`
+- 👉 Join the [Community](https://discord.gg/fZC6hup) and chat with the `support` team 
+- 👉 [Deploy Django on AWS, DO, and Azure](https://www.docs.deploypro.dev/) using `DeployPRO`

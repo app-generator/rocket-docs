@@ -1,5 +1,13 @@
 # Change Log
 
+## [1.0.4] 2023-09-17
+### Changes
+
+- UPD [Django](https://docs.app-generator.dev/technologies/django) Section
+  - [Django Release History](https://docs.app-generator.dev/technologies/django/releases)
+  - [Django Asynchronous Support](https://docs.app-generator.dev/technologies/django/async-support)
+  - [ASGI Servers for Django](https://docs.app-generator.dev/technologies/django/asgi-servers)
+
 ## [1.0.3] 2023-08-29
 ### Changes
 

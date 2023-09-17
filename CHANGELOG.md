@@ -1,5 +1,14 @@
 # Change Log
 
+## [1.0.5] 2023-09-17
+### Changes
+
+- [Django App Generators](https://docs.app-generator.dev/blog/django-app-generators)
+- [Django and Celery Integration](https://docs.app-generator.dev/technologies/django/celery-integration)
+- [Django and Stripe Integration](https://docs.app-generator.dev/technologies/django/stripe-integration)
+- [Django and Redis Integration](https://docs.app-generator.dev/technologies/django/redis-integration)
+- [Django and React Integration](https://docs.app-generator.dev/technologies/django/react-integration)
+
 ## [1.0.4] 2023-09-17
 ### Changes
 

@@ -1,0 +1,183 @@
+---
+sidebar_position : 2
+title            : Django and React Integration   
+sidebar_label    : Django & React
+---
+
+# Django and React Integration
+
+Integrating **Django with React** is a popular choice for building modern web applications that combine Django's backend capabilities with React's powerful frontend library. 
+
+![Django Web Framework - React Integration (Cover Image)](https://github-production-user-asset-6210df.s3.amazonaws.com/51070104/268485357-df36ff1d-9e89-4725-b38e-9ed3cff950be.png)
+
+> Here's an overview of how to integrate Django and React, common use cases, and a coding sample to get you started.
+
+## ✅ **Integration Overview**
+
+Django is primarily used as a backend framework, while React is a JavaScript library for building user interfaces on the frontend. 
+Integrating Django and React allows you to create dynamic, single-page applications (SPAs) or progressive web apps (PWAs) that offer a responsive and interactive user experience. 
+
+> Here's how the integration typically works:
+
+### **Django Backend** 
+
+Django serves as the backend of your application, handling tasks like routing, authentication, database operations, and API endpoints.
+
+### **React Frontend** 
+
+React handles the frontend part, rendering the user interface, managing state, and handling user interactions.
+
+### **API Communication**: Django provides a RESTful API using Django REST framework or GraphQL to communicate with the React frontend. The React components make API requests to fetch and update data from the Django backend.
+
+<br />
+
+## ✅ **Common Use Cases**
+
+### **Single-Page Applications (SPAs)** 
+
+Build SPAs that offer smooth and responsive user experiences with fast navigation between views.
+
+### **Progressive Web Apps (PWAs)** 
+
+Create PWAs that work offline, offer push notifications, and provide an app-like experience to users.
+
+### **Real-Time Updates** 
+
+Implement real-time features like chat, notifications, and live updates using technologies like WebSockets.
+
+### **Complex User Interfaces** 
+
+Develop complex user interfaces with rich interactions, dynamic data rendering, and seamless transitions.
+
+### **Data Visualization** 
+
+Use React libraries like D3.js to create interactive data visualizations and charts.
+
+<br />
+
+## ✅ **Coding Sample (Django & React)**
+
+Here's a simplified example of how to integrate Django and React for a basic application. 
+We'll create a Django REST API to manage a list of tasks, and the React frontend will interact with this API to display and manage tasks.
+
+### **Set Up Django Backend**
+
+1. Create a new Django project if you don't already have one.
+
+2. Create a Django app to manage tasks:
+
+   ```bash
+   python manage.py startapp tasks
+   ```
+
+3. Define a Task model in the `tasks/models.py` file:
+
+   ```python
+   # tasks/models.py
+   from django.db import models
+
+   class Task(models.Model):
+       title = models.CharField(max_length=200)
+       completed = models.BooleanField(default=False)
+
+       def __str__(self):
+           return self.title
+   ```
+
+4. Create a REST API using Django REST framework to expose tasks as JSON. Define serializers and views for the Task model.
+
+   - Install Django REST framework if you haven't already:
+
+     ```bash
+     pip install djangorestframework
+     ```
+
+   - Configure the REST framework in your project's `settings.py`.
+
+   - Create serializers and views for the Task model in the `tasks` app.
+
+5. Configure URL patterns to define API endpoints for tasks.
+
+### **Set Up React Frontend**
+
+1. Create a React app using Create React App or your preferred setup:
+
+   ```bash
+   npx create-react-app task-manager
+   ```
+
+2. Inside the React app, create components for displaying tasks and managing tasks.
+
+3. Use Axios or the Fetch API to make API requests to the Django backend and retrieve task data.
+
+4. Create forms and components to add, edit, and delete tasks. Handle user interactions.
+
+5. Use React Router or other routing libraries to navigate between different views.
+
+### **Connect React to Django API**
+
+1. In your React components, use `fetch` or Axios to make API requests to the Django backend. For example, to retrieve tasks:
+
+   ```javascript
+   // src/components/Tasks.js
+   import React, { useState, useEffect } from 'react';
+
+   function Tasks() {
+       const [tasks, setTasks] = useState([]);
+
+       useEffect(() => {
+           fetch('/api/tasks/')
+               .then((response) => response.json())
+               .then((data) => setTasks(data));
+       }, []);
+
+       return (
+           <div>
+               <h2>Tasks</h2>
+               <ul>
+                   {tasks.map((task) => (
+                       <li key={task.id}>{task.title}</li>
+                   ))}
+               </ul>
+           </div>
+       );
+   }
+
+   export default Tasks;
+   ```
+
+2. Implement functions to handle CRUD (Create, Read, Update, Delete) operations on tasks and update the UI accordingly.
+
+### **Run the Django Server and React App**
+
+1. Start the Django development server:
+
+   ```bash
+   python manage.py runserver
+   ```
+
+2. Start the React development server:
+
+   ```bash
+   cd task-manager
+   npm start
+   ```
+
+3. Visit `http://localhost:3000` in your web browser to access the React app. The `React app will communicate with the Django Backend` to manage tasks.
+
+<br />
+
+## ✅ In Summary
+
+This example provides a basic starting point for **integrating Django and React**. 
+Depending on your project's complexity and requirements, you can expand upon this foundation by adding authentication, real-time features, complex user interfaces, and more. 
+
+`Django and React` together offer a powerful combination for building modern web applications.
+
+<br />
+
+## ✅ Resources
+
+- 👉 [Generate Django Apps](https://app-generator.dev/django/) using `Rocket Generator`
+- 👉 Join the [Community](https://discord.gg/fZC6hup) and chat with the `support` team 
+- 👉 [Deploy Django on AWS, DO, and Azure](https://www.docs.deploypro.dev/) using `DeployPRO`
